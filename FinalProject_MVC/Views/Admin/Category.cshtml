@@ -1,0 +1,28 @@
+﻿@model List<Category>
+
+
+@if (Model is null || Model.Count == 0)
+{
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger">
+				There is nothing besides our thoughts. What about adding some categories?
+			</div>
+		</div>
+	</div>
+	
+	<button onclick="location.href='@Url.Action("AddCategory", "Admin")'" class="btn btn-success btn-lg btn-block">+ Add Category</button>
+}
+else
+{
+	<button onclick="location.href='@Url.Action("AddCategory", "Admin")'" class="btn btn-success btn-lg btn-block">+ Add Category</button>
+
+	<div class="row mt-5">
+		@foreach (var product in Model)
+		{
+			<div class="col-md-3">
+				@await Html.PartialAsync("_categories", product)
+			</div>
+		}
+	</div>
+}

@@ -1,0 +1,28 @@
+@model ShoppingListDetail
+
+@if (Model.isBought)
+{
+	<div class="card mb-2" style="background-color:#b8b8b8">
+		<img class="card-img-top" src="@Model.Item.ImageLink" style="max-height: 220px" alt="">
+		<div class="card-body">
+			<h5 class="card-title">@Model.Item.Name</h5>
+			<p class="card-text">Amount/Pieces/KG: @Model.Amount</p>
+			<div>
+				<input type="checkbox" data-val="true" id="IsBought" name="IsBought" value=@Model.isBought>
+			</div>
+		</div>
+	</div>
+}
+else
+{
+	<div class="card mb-2">
+		<img class="card-img-top" src="@Model.Item.ImageLink" style="max-height: 220px" alt="">
+		<div class="card-body">
+			<h5 class="card-title">@Model.Item.Name</h5>
+			<p class="card-text">Amount/Pieces/KG: @Model.Amount</p>
+			<div>
+				<input type="checkbox" data-val="true" id="IsBought" name="IsBought" value=@Model.isBought>
+			</div>
+		</div>
+	</div>
+}

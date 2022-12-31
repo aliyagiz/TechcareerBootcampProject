@@ -1,0 +1,28 @@
+﻿@model List<Item>
+
+
+@if (Model is null || Model.Count == 0)
+{
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger">
+				There is nothing besides our thoughts. What about adding some items?
+			</div>
+		</div>
+	</div>
+
+	<button onclick="location.href='@Url.Action("AddItem", "Admin")'" class="btn btn-success btn-lg btn-block">+ Add Item</button>
+}
+else
+{
+	<button onclick="location.href='@Url.Action("AddItem", "Admin")'" class="btn btn-success btn-lg btn-block">+ Add Item</button>
+
+	<div class="row mt-5">
+		@foreach (var product in Model)
+		{
+			<div class="col-md-3">
+				@await Html.PartialAsync("_items", product)
+			</div>
+		}
+	</div>
+}

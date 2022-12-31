@@ -1,0 +1,52 @@
+﻿@using FinalProject_MVC.Models;
+@model FinalProject_MVC.Models.User
+
+@{
+	ViewData["Title"] = "Home Page";
+	Layout = null;
+}
+<link rel="stylesheet" href="~/css/Index.css" />
+<script src="~/js/Index.js"></script>
+<!-- This Index page is created by Hyperplexed. Don't forget to check his channel - https://youtu.be/NUeCNvYY_x4 -->
+
+<div id="menu">
+	<div id="menu-items">
+		@*div class="menu-item">
+		<a href="@Url.Action("Index","Home")">Home</a>
+		</div>*@
+
+		@if (Model is null)
+		{
+			<div class="menu-item">
+				<a href="@Url.Action("Login","Home")">Login</a>
+			</div>
+			<div class="menu-item">
+				<a href="@Url.Action("Register","Home")">Register</a>
+			</div>
+		}
+
+		@if (Model is not null)
+		{
+			<div class="menu-item">
+				<a href="@Url.Action("Index","ShoppingList")">Shopping List</a>
+			</div>
+		}
+		@if (Model is not null && Model.isAdmin)
+		{
+			<div class="menu-item">
+				<a href="@Url.Action("Item","Admin")">Items</a>
+			</div>
+			<div class="menu-item">
+				<a href="@Url.Action("Category","Admin")">Categories</a>
+			</div>
+		}
+		<div class="menu-item">
+			<a href="@Url.Action("Privacy","Home")">Privacy</a>
+		</div>
+
+	</div>
+	<div id="menu-background-pattern"></div>
+	<div id="menu-background-image"></div>
+</div>
+
+

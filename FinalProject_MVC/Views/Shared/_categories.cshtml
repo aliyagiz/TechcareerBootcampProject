@@ -1,0 +1,27 @@
+@model Category
+
+
+@*@{
+	if (Model.isActive)
+	{
+		var bc = "07630d";
+	}
+	else
+	{
+		var bc = "5c0606";
+	}
+}*@
+
+<div class="card mb-2">
+	<div class="card-body">
+		<h5 class="card-title">@Model.CategoryName</h5>
+		@*<a asp-controller="Admin" asp-action="EditCategory" asp-route-id="@Model.CategoryId" class="btn btn-primary btn-sm">Edit</a>*@
+
+		<form method="POST" action="/admin/deletecategory" style="display: inline;">
+			<input type="hidden" name="CategoryId" value="@Model.CategoryId">
+			<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+		</form>
+
+
+	</div>
+</div>   

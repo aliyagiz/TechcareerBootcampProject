@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+
+@{
+	Context.Request.Cookies.TryGetValue("User", out string UserInfo);
+	Context.Request.Cookies.TryGetValue("Auth", out string Auth);
+}
+@{
+	var msg = "";
+	if (TempData.ContainsKey("NotificationMsg"))
+	{
+		msg = TempData["NotificationMsg"] as string;
+	}
+}
+
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - FinalProject_MVC</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/FinalProject_MVC.styles.css" asp-append-version="true" />
+
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		  rel="stylesheet" />
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+		  rel="stylesheet" />
+	<!-- MDB -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
+		  rel="stylesheet" />
+
+</head>
+<body>
+	<div id="page-container">
+		<div id="content-wrap">
+
+
+			<nav class="navbar navbar-expand-lg">
+				<div class="container-fluid">
+					<a class="logo" href="@Url.Action("Index","Home")">
+						<img src="~/img/logo.png" asp-append-version="true" style="width: 80px;" class="ms-5 me-5">
+					</a>
+
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						@*<li class="nav-item ms-5">
+						<a href="@Url.Action("Index","Home")" class="nav-link fs-5" style="font-weight: 500;">Home</a>
+						</li>*@
+						@if (UserInfo is null)
+						{
+							<li class="nav-item ms-5">
+								<a href="@Url.Action("Login","Home")" class="nav-link fs-5" style="font-weight: 500;">Login</a>
+							</li>
+							<li class="nav-item ms-5">
+								<a href="@Url.Action("Register","Home")" class="nav-link fs-5" style="font-weight: 500;">Register</a>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item ms-5">
+								<a href="@Url.Action("Index","ShoppingList")" class="nav-link fs-5" style="font-weight: 500;">Shopping List</a>
+							</li>
+						}
+
+						@if (Auth is not null && Auth.ToLower() == "true")
+						{
+							<li class="nav-item ms-5">
+								<a href="@Url.Action("Item","Admin")" class="nav-link fs-5" style="font-weight: 500;">Items</a>
+							</li>
+							<li class="nav-item ms-5">
+								<a href="@Url.Action("Category","Admin")" class="nav-link fs-5" style="font-weight: 500;">Categories</a>
+							</li>
+						}
+						<li class="nav-item ms-5">
+							<a href="@Url.Action("Privacy","Home")" class="nav-link fs-5" style="font-weight: 500;">Privacy</a>
+						</li>
+
+					</ul>
+					@if (UserInfo is null)
+					{
+						<button class="login-btn btn btn-m btn-outline-secondary me-5" onclick="location.href='@Url.Action("Login", "Home")'" formaction="Login" type="button">LOGIN</button>
+					}
+					else
+					{
+						<div class="nav-link fs-5 pe-3">Welcome, @UserInfo</div>
+						<button class="login-btn btn btn-sm btn-outline-secondary me-5" onclick="location.href='@Url.Action("Logout", "Home")'" formaction="Logout" type="button">LOGOUT</button>
+					}
+
+				</div>
+			</nav>
+
+			<div class="container">
+				<main role="main" class="pb-5 pt-5">
+					@if (msg is not null && msg != "")
+					{
+						<div id="notification" class="alert alert-primary text-center m-0 mb-5">
+							@msg
+						</div>
+					}
+
+					@RenderBody()
+				</main>
+			</div>
+
+
+		</div>
+
+		<footer class="border-top footer text-muted text-center">
+			<div class="container" style="font-weight: 500;">
+				Copyright &copy; Shopping App @DateTime.Now.Year
+			</div>
+		</footer>
+
+	</div>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

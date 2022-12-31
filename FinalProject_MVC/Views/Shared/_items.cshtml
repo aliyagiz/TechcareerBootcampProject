@@ -1,0 +1,17 @@
+@model Item
+
+<div class="card mb-2">
+	<img class="card-img-top" src="@Model.ImageLink" style="max-height: 220px" alt="">
+	<div class="card-body">
+		<h5 class="card-title">@Model.Name</h5>
+		<p class="card-text">@Model.Category</p>
+		@*<a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.ItemId" class="btn btn-primary btn-sm">Edit</a>*@
+
+		<form method="POST" action="/admin/deleteitem" style="display: inline;">
+			<input type="hidden" name="ItemId" value="@Model.ItemId">
+			<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+		</form>
+
+
+	</div>
+</div>   

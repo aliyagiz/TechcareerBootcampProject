@@ -1,0 +1,26 @@
+﻿@model ShoppingList
+
+<div class="card mb-2">
+	<div class="card-body">
+		<h5 class="card-title">@Model.ShoppingListName</h5>
+		<p class="card-text">@Model.Description</p>
+		
+
+		<form method="POST" action="/ShoppingList/DeleteShoppingList" style="display: inline;">
+			<input type="hidden" name="ListId" value="@Model.ShoppingListId">
+			<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+		</form>
+
+		<form method="POST" action="/ShoppingList/ViewShoppingList" style="display: inline;">
+			<input type="hidden" name="ListId" value="@Model.ShoppingListId">
+			<button type="submit" class="btn btn-primary btn-sm">View List</button>
+		</form>
+
+		<form method="POST" action="/ShoppingList/AddShoppingListItem" style="display: inline;">
+			<input type="hidden" name="ListId" value="@Model.ShoppingListId">
+			<button type="submit" class="btn btn-success btn-sm">Add Item</button>
+		</form>
+
+
+	</div>
+</div>   

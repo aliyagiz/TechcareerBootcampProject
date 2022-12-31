@@ -1,0 +1,27 @@
+﻿@model List<ShoppingList>
+
+@if (Model is null || Model.Count == 0)
+{
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger">
+				"Do not go gentle into that good night.". What about creating Shopping List?
+			</div>
+		</div>
+	</div>
+
+	<button onclick="location.href='@Url.Action("AddShoppinglist", "Shoppinglist")'" class="btn btn-success btn-lg btn-block">+ Create</button>
+}
+else
+{
+	<button onclick="location.href='@Url.Action("AddShoppinglist", "Shoppinglist")'" class="btn btn-success btn-lg btn-block">+ Create</button>
+
+	<div class="row mt-5">
+		@foreach (var shoppingListItem in Model)
+		{
+			<div class="col-md-3">
+				@await Html.PartialAsync("_shoppingList", shoppingListItem)
+			</div>
+		}
+	</div>
+}

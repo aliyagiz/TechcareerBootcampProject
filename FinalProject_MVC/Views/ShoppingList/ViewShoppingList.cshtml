@@ -1,0 +1,24 @@
+﻿@model List<ShoppingListDetail>
+
+
+@if (Model is null || Model.Count == 0)
+{
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger">
+				There is nothing besides our thoughts. What about adding some items?
+			</div>
+		</div>
+	</div>
+}
+else
+{
+	<div class="row mt-5">
+		@foreach (var sld in Model)
+		{
+			<div class="col-md-3">
+				@await Html.PartialAsync("_shoppinglistdetail", sld)
+			</div>
+		}
+	</div>
+}
